@@ -6,7 +6,7 @@ IMAGE_NAME=U20MELP
 
 if docker image inspect $IMAGE_NAME &>/dev/null; then
 	echo "Image doesn't exists locally"
-	echo "Building...:
+	echo "Building..."
 	cd $WORK_DIR/Docker
 	docker build . -t ubuntu_melp
 cd $WORK_DIR
