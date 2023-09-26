@@ -11,12 +11,15 @@ if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
 fi
 
 cd $WORK_DIR
+mkdir .home &>/dev/null
+
 echo "Starting Docker Container"
 
 docker run \
 	-it \
 	--rm \
 	-v $WORK_DIR/work:/work \
+	-v $WORK_DIR/.home:/home/${USER} \
 	-v /etc/passwd:/etc/passwd:ro \
 	-v /etc/group:/etc/group:ro \
 	-u $(id -u ${USER}):$(id -g ${USER}) \
