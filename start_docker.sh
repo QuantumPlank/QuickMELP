@@ -1,14 +1,15 @@
 #!/bin/bash
 
 WORK_DIR=$(pwd)
-IMAGE_NAME=U20MELP
+IMAGE_NAME=u20melp
 
 
 if docker image inspect $IMAGE_NAME &>/dev/null; then
 	echo "Image doesn't exists locally"
 	echo "Building..."
 	cd $WORK_DIR/Docker
-	docker build . -t ubuntu_melp
+	docker build . -t ubuntu_melpi
+fi
 cd $WORK_DIR
 echo "Starting Docker Container"
 
