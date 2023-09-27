@@ -32,4 +32,6 @@ unzip \
 wget \
 xz-utils \
 git \
-pkg-config 
+pkg-config \
+qemu-system-arm \
+qemu-efi
