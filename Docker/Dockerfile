@@ -8,6 +8,7 @@ RUN apt-get install -y \
 autoconf \
 automake \
 bison \
+bc \
 bzip2 \
 cmake \
 flex \
@@ -31,4 +32,4 @@ unzip \
 wget \
 xz-utils \
 git \
-pkg-config
+pkg-config 
