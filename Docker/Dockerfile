@@ -48,7 +48,6 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Copy utility files/scripts to docker fs
 COPY scripts/* /usr/
-COPY files/* /home/melp
 
 # Set default user
 USER melp

@@ -24,6 +24,7 @@ case $1 in
 		./configure --prefix=$(pwd)
 		make
 		make install
+		cd $WORK_DIR
 		;;
 	"rpi")
 		BIN_DIR=$TOOLCHAIN_DIR/aarch64-rpi4-linux-gnu/bin
@@ -36,8 +37,6 @@ case $1 in
 		export ARCH=arm
 		;;
 esac
-
-cd $WORK_DIR
 
 #PATH HANDLE
 append_path $CROSSTOOL_DIR
