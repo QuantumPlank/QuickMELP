@@ -1,28 +1,27 @@
 #!/bin/bash
 
 WORK_DIR=$(pwd)
-IMAGE_NAME=u20melp
 
-if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
+IMAGE_NAME=u20melp
+IMAGE_SHA=($(sha1sum Docker/Dockerfile))
+IMAGE=$IMAGE_NAME:$IMAGE_SHA
+
+echo "Checking docker image availability"
+if [[ "$(docker images -q $IMAGE 2> /dev/null)" == "" ]]; then
 	echo "Image doesn't exists locally"
 	echo "Building..."
 	cd $WORK_DIR/Docker
-	docker build . -t $IMAGE_NAME
+	docker build . -t $IMAGE
+	cd $WORK_DIR
 fi
 
-cd $WORK_DIR
-mkdir .home &>/dev/null
+mkdir work &>/dev/null
 
 echo "Starting Docker Container"
-
 docker run \
 	-it \
 	--rm \
+	--privileged \
 	-v $WORK_DIR/work:/work \
-	-v $WORK_DIR/.home:/home/${USER} \
-	-v /etc/passwd:/etc/passwd:ro \
-	-v /etc/group:/etc/group:ro \
-	-u $(id -u ${USER}):$(id -g ${USER}) \
-	$IMAGE_NAME \
+	$IMAGE \
 	/bin/bash
-

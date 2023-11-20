@@ -1,9 +1,14 @@
 FROM ubuntu:20.04
 
-RUN apt update && apt-get upgrade -y
+LABEL maintainer="QuantumPlank@outlook.com"
+LABEL version="0.2"
+LABEL description="This Docker Image is intended to be used as a build environment for MELP"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+RUN apt update && apt-get upgrade -y
+
+# Install Host packages
 RUN apt-get install -y \
 autoconf \
 automake \
@@ -35,3 +40,15 @@ git \
 pkg-config \
 qemu-system-arm \
 qemu-efi
+
+# Create melp user
+RUN adduser --disabled-password --gecos '' melp
+RUN adduser melp sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+# Copy utility files/scripts to docker fs
+COPY scripts/* /usr/
+COPY files/* /home/melp
+
+# Set default user
+USER melp
