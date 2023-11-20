@@ -51,3 +51,6 @@ COPY scripts/* /usr/
 
 # Set default user
 USER melp
+
+# Set default make behavior
+RUN alias make="make -j $(nproc --all)"
