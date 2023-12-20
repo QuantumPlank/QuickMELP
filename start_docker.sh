@@ -22,6 +22,7 @@ docker run \
 	-it \
 	--rm \
 	--privileged \
+	-v $WORK_DIR/Docker/scripts:/scripts \
 	-v $WORK_DIR/work:/work \
 	$IMAGE \
 	/bin/bash

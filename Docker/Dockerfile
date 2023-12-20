@@ -39,18 +39,14 @@ xz-utils \
 git \
 pkg-config \
 qemu-system-arm \
-qemu-efi
+qemu-efi \
+device-tree-compiler \
+u-boot-tools
 
 # Create melp user
 RUN adduser --disabled-password --gecos '' melp
 RUN adduser melp sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-# Copy utility files/scripts to docker fs
-COPY scripts/* /usr/
-
 # Set default user
 USER melp
-
-# Set default make behavior
-RUN alias make="make -j $(nproc --all)"
