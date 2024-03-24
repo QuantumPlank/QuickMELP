@@ -80,9 +80,7 @@ case $1 in
 				cd $CROSSTOOL_DIR
 				bin/ct-ng distclean
 				bin/ct-ng $TGT_BBLACK
-				sed -i 's+CT_LOCAL_TARBALLS_DIR="${HOME}/src"+CT_LOCAL_TARBALLS_DIR="'"$WORK_DIR"'/src"+g' .config
-				sed -i 's/CT_PREFIX_DIR_RO=y/# CT_PREFIX_DIR_RO is not set/g' .config
-				sed -i 's+CT_PREFIX_DIR="${CT_PREFIX:-${HOME}/+CT_PREFIX_DIR="${CT_PREFIX:-"'"$WORK_DIR"'"/+g' .config
+				patch /scripts/bblack.path .config
 				bin/ct-ng build.$(nproc --all)
 				cd $WORK_DIR
 			else
