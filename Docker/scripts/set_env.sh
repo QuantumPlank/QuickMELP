@@ -62,9 +62,7 @@ case $1 in
 				cd $CROSSTOOL_DIR
 				bin/ct-ng distclean
 				bin/ct-ng $TGT_QEMU
-				sed -i 's+CT_LOCAL_TARBALLS_DIR="${HOME}/src"+CT_LOCAL_TARBALLS_DIR="'"$WORK_DIR"'/src"+g' .config
-				sed -i 's/CT_PREFIX_DIR_RO=y/# CT_PREFIX_DIR_RO is not set/g' .config
-				sed -i 's+CT_PREFIX_DIR="${CT_PREFIX:-${HOME}/+CT_PREFIX_DIR="${CT_PREFIX:-"'"$WORK_DIR"'"/+g' .config
+				patch --verbose .config /scripts/qemu.patch
 				bin/ct-ng build.$(nproc --all)
 				cd $WORK_DIR
 			else
@@ -98,29 +96,7 @@ case $1 in
 				cd $CROSSTOOL_DIR
 				bin/ct-ng distclean
 				bin/ct-ng $TGT_RPI4
-				sed -i 's+CT_LOCAL_TARBALLS_DIR="${HOME}/src"+CT_LOCAL_TARBALLS_DIR="'"$WORK_DIR"'/src"+g' .config
-				sed -i 's/CT_PREFIX_DIR_RO=y/# CT_PREFIX_DIR_RO is not set/g' .config
-				sed -i 's+CT_PREFIX_DIR="${CT_PREFIX:-${HOME}/+CT_PREFIX_DIR="${CT_PREFIX:-"'"$WORK_DIR"'"/+g' .config
-				bin/ct-ng build.$(nproc --all)
-				cd $WORK_DIR
-			else
-				echo "TOOLCHAIN already installed"
-			fi
-		else
-			echo "CROSSTOOL is not installed"
-		fi
-		;;
-	"setup_opi3")
-		append_path $CROSSTOOL_DIR
-		if [[ -d $CROSSTOOL_DIR ]]; then
-			if [[ ! -d $TGT_OPI3_BIN ]]; then
-				cd $CROSSTOOL_DIR
-				bin/ct-ng distclean
-				bin/ct-ng $TGT_RPI4
-				sed -i 's+CT_LOCAL_TARBALLS_DIR="${HOME}/src"+CT_LOCAL_TARBALLS_DIR="'"$WORK_DIR"'/src"+g' .config
-				sed -i 's/CT_PREFIX_DIR_RO=y/# CT_PREFIX_DIR_RO is not set/g' .config
-				sed -i 's+CT_PREFIX_DIR="${CT_PREFIX:-${HOME}/+CT_PREFIX_DIR="${CT_PREFIX:-"'"$WORK_DIR"'"/+g' .config
-				sed -i 's+CT_TARGET_VENDOR=".*"+CT_TARGET_VENDOR="opi3"/+g' .config
+				patch --verbose .config /scripts/rpi4.patch
 				bin/ct-ng build.$(nproc --all)
 				cd $WORK_DIR
 			else
@@ -153,15 +129,6 @@ case $1 in
 			append_path $TGT_RPI4_BIN
 			export CROSS_COMPILE=$TGT_RPI4-
 			export ARCH=$TGT_RPI4_ARCH
-		else
-			echo "TOOLCHAIN is not installed"
-		fi
-		;;
-	"set_opi3")
-		if [[ -d $TGT_OPI3_BIN ]]; then
-			append_path $TGT_OPI3_BIN
-			export CROSS_COMPILE=$TGT_OPI3-
-			export ARCH=$TGT_OPI3_ARCH
 		else
 			echo "TOOLCHAIN is not installed"
 		fi

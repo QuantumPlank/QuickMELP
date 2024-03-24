@@ -1,0 +1,12 @@
+51c51
+< CT_LOCAL_TARBALLS_DIR="${HOME}/src"
+---
+> CT_LOCAL_TARBALLS_DIR="/work/src"
+57c57
+< CT_PREFIX_DIR="${CT_PREFIX:-${HOME}/x-tools}/${CT_HOST:+HOST-${CT_HOST}/}${CT_TARGET}"
+---
+> CT_PREFIX_DIR="${CT_PREFIX:-"/work"/x-tools}/${CT_HOST:+HOST-${CT_HOST}/}${CT_TARGET}"
+61c61
+< CT_PREFIX_DIR_RO=y
+---
+> # CT_PREFIX_DIR_RO is not set
