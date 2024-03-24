@@ -22,6 +22,7 @@ docker run \
 	-it \
 	--rm \
 	-v $WORK_DIR/Docker/scripts:/scripts \
+	-v $WORK_DIR/Docker/patches:/patches \
 	-v $WORK_DIR/work:/work \
 	-w /work \
 	$IMAGE \

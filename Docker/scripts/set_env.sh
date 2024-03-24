@@ -28,7 +28,7 @@ TGT_OPI3_BIN=$TOOLCHAIN_DIR/$TGT_OPI3/bin
 TGT_OPI3_ARCH=arm
 # BBLACK
 TGT_BBLACK=arm-cortex_a8-linux-gnueabi
-TGT_BBLACK_BIN=$TOOLCHAIN_DIR/$TGT_BBLACK/bin
+TGT_BBLACK_BIN=$TOOLCHAIN_DIR/arm-cortex_a8-linux-gnueabihf/bin
 TGT_BBLACK_ARCH=arm
 
 
@@ -62,7 +62,7 @@ case $1 in
 				cd $CROSSTOOL_DIR
 				bin/ct-ng distclean
 				bin/ct-ng $TGT_QEMU
-				patch --verbose .config /scripts/qemu.patch
+				patch --verbose .config /patches/qemu.patch
 				bin/ct-ng build.$(nproc --all)
 				cd $WORK_DIR
 			else
@@ -79,7 +79,7 @@ case $1 in
 				cd $CROSSTOOL_DIR
 				bin/ct-ng distclean
 				bin/ct-ng $TGT_BBLACK
-				patch --verbose .config /scripts/bblack.patch
+				patch --verbose .config /patches/bblack.patch
 				bin/ct-ng build.$(nproc --all)
 				cd $WORK_DIR
 			else
@@ -96,7 +96,7 @@ case $1 in
 				cd $CROSSTOOL_DIR
 				bin/ct-ng distclean
 				bin/ct-ng $TGT_RPI4
-				patch --verbose .config /scripts/rpi4.patch
+				patch --verbose .config /patches/rpi4.patch
 				bin/ct-ng build.$(nproc --all)
 				cd $WORK_DIR
 			else
