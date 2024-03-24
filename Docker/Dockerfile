@@ -86,3 +86,5 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Set default user
 USER melp
+
+RUN echo export PATH="$PATH:/scripts" > ~/.bashrc

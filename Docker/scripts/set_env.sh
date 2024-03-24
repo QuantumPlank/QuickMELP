@@ -24,6 +24,9 @@ TGT_OPI3=aarch64-opi3-linux-gnu
 TGT_OPI3_BIN=$TOOLCHAIN_DIR/$TGT_OPI3/bin
 TGT_OPI3_ARCH=arm
 
+if [ -z $CROSSTOOL_VERSION ]; then
+	CROSSTOOL_VERSION="crosstool-ng-1.26.0"
+fi
 
 # Handle setup
 case $1 in
@@ -31,7 +34,7 @@ case $1 in
 		if [[ ! -d $CROSSTOOL_DIR ]]; then
 			git clone https://github.com/crosstool-ng/crosstool-ng.git $CROSSTOOL_DIR
 			cd $CROSSTOOL_DIR
-			git checkout crosstool-ng-1.26.0
+			git checkout $CROSSTOOL_VERSION
 			rm -rf ${WORK_DIR}/src
 			mkdir ${WORK_DIR}/src
 			./bootstrap
