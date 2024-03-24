@@ -9,6 +9,7 @@ append_path()
 [[ "${BASH_SOURCE[0]}" != "${0}" ]] || { echo "Must be sourced" && exit 1; }
 
 # Paths
+cd /work
 WORK_DIR=$(pwd)
 CROSSTOOL_DIR=$WORK_DIR/crosstool-ng
 TOOLCHAIN_DIR=$WORK_DIR/x-tools
@@ -80,7 +81,7 @@ case $1 in
 				cd $CROSSTOOL_DIR
 				bin/ct-ng distclean
 				bin/ct-ng $TGT_BBLACK
-				patch /scripts/bblack.path .config
+				patch --verbose .config /scripts/bblack.patch
 				bin/ct-ng build.$(nproc --all)
 				cd $WORK_DIR
 			else
