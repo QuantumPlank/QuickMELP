@@ -6,7 +6,7 @@ append_path()
 }
 
 # Check if sourced
-[[ "${BASH_SOURCE[0]}" != "${0}" ]] || echo "Must be sourced" && exit 1;
+[[ "${BASH_SOURCE[0]}" != "${0}" ]] || { echo "Must be sourced" && exit 1; }
 
 # Paths
 WORK_DIR=$(pwd)
