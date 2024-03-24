@@ -45,6 +45,7 @@ case $1 in
 		else
 			echo "CROSSTOOL is already installed"
 		fi
+		append_path $CROSSTOOL_DIR
 		;;
 	"setup_qemu")
 		append_path $CROSSTOOL_DIR
