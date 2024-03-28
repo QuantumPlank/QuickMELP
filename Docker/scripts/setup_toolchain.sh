@@ -27,7 +27,7 @@ TGT_OPI3=aarch64-opi3-linux-gnu
 TGT_OPI3_BIN=$TOOLCHAIN_DIR/$TGT_OPI3/bin
 TGT_OPI3_ARCH=arm
 # BBLACK
-TGT_BBLACK=arm-cortex_a8-linux-gnueabi
+TGT_BBLACK=arm-cortex_a8-linux-gnueabihf
 TGT_BBLACK_BIN=$TOOLCHAIN_DIR/arm-cortex_a8-linux-gnueabihf/bin
 TGT_BBLACK_ARCH=arm
 
@@ -78,7 +78,7 @@ case $1 in
 			if [[ ! -d $TGT_BBLACK_BIN ]]; then
 				cd $CROSSTOOL_DIR
 				bin/ct-ng distclean
-				bin/ct-ng $TGT_BBLACK
+				bin/ct-ng $TGT_RPI4
 				patch --verbose .config /patches/bblack.patch
 				bin/ct-ng build.$(nproc --all)
 				cd $WORK_DIR
