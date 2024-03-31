@@ -78,7 +78,7 @@ case $1 in
 			if [[ ! -d $TGT_BBLACK_BIN ]]; then
 				cd $CROSSTOOL_DIR
 				bin/ct-ng distclean
-				bin/ct-ng $TGT_RPI4
+				bin/ct-ng arm-cortex_a8-linux-gnueabi
 				patch --verbose .config /patches/bblack.patch
 				bin/ct-ng build.$(nproc --all)
 				cd $WORK_DIR
